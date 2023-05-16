@@ -13,8 +13,13 @@ resource "aws_eip" "linux-eip" {
 
 # Create EC2 Instance
 resource "aws_instance" "linux-server" {
-  ami                         = data.aws_ami.ubuntu-linux-1804.id
-  instance_type               = var.linux_instance_type
+#  count =                     1
+#  ami                         = data.aws_ami.ubuntu-linux-2004.id
+#  instance_type               = var.linux_instance_type
+#  ami                         = "ami-0cf13cb849b11b451" # Ubuntu 20.04 desktop image
+#  instance_type               = "t3.micro"
+  ami                         = "ami-0536f90611129659d"
+  instance_type               = "t3.medium"
   subnet_id                   = aws_subnet.public-subnet.id
   vpc_security_group_ids      = [aws_security_group.aws-linux-sg.id]
   associate_public_ip_address = var.linux_associate_public_ip_address
@@ -47,6 +52,7 @@ resource "aws_instance" "linux-server" {
 
 # Associate Elastic IP to Linux Server
 resource "aws_eip_association" "linux-eip-association" {
+#  instance_id   = aws_instance.linux-server.id
   instance_id   = aws_instance.linux-server.id
   allocation_id = aws_eip.linux-eip.id
 }
@@ -68,6 +74,14 @@ resource "aws_security_group" "aws-linux-sg" {
   ingress {
     from_port   = 22
     to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow incoming SSH connections"
+  }
+
+  ingress {
+    from_port   = 3389
+    to_port     = 3389
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allow incoming SSH connections"
