@@ -13,3 +13,9 @@ variable "app_environment" {
   type        = string
   description = "Application environment"
 }
+
+variable "f5_se" {
+  type        = string
+  description = "F5 Engineer"
+}
+

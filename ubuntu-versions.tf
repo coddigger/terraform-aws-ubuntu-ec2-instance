@@ -44,6 +44,6 @@ data "aws_ami" "ubuntu-linux-2004" {
 #   value = data.aws_ami.ubuntu-linux-1804.id
 # }
 
- output "ubuntu_2004_ami_id" {
-   value = data.aws_ami.ubuntu-linux-2004.id
- }
+output "ubuntu_2004_ami_id" {
+  value = data.aws_ami.ubuntu-linux-2004.id
+}

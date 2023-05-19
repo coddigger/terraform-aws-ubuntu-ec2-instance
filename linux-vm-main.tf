@@ -4,29 +4,30 @@
 
 # Create Elastic IP for the EC2 instance
 resource "aws_eip" "linux-eip" {
-  vpc  = true
+  vpc = true
   tags = {
     Name        = "${lower(var.app_name)}-${var.app_environment}-linux-eip"
     Environment = var.app_environment
+    F5SE = var.f5_se
   }
 }
 
 # Create EC2 Instance
 resource "aws_instance" "linux-server" {
-#  count =                     1
-#  ami                         = data.aws_ami.ubuntu-linux-2004.id
-#  instance_type               = var.linux_instance_type
-#  ami                         = "ami-0cf13cb849b11b451" # Ubuntu 20.04 desktop image
-#  instance_type               = "t3.micro"
-  ami                         = "ami-0536f90611129659d"
-  instance_type               = "t3.medium"
+  #  count =                     1
+  #  ami                         = data.aws_ami.ubuntu-linux-2004.id
+  instance_type = var.linux_instance_type
+  #  ami                         = "ami-0cf13cb849b11b451" # Ubuntu 20.04 desktop image
+  #  instance_type               = "t3.micro"
+  ami = "ami-0536f90611129659d"
+  #  instance_type               = "t3.medium"
   subnet_id                   = aws_subnet.public-subnet.id
   vpc_security_group_ids      = [aws_security_group.aws-linux-sg.id]
   associate_public_ip_address = var.linux_associate_public_ip_address
   source_dest_check           = false
   key_name                    = aws_key_pair.key_pair.key_name
   user_data                   = file("aws-user-data.sh")
-  
+
   # root disk
   root_block_device {
     volume_size           = var.linux_root_volume_size
@@ -43,16 +44,17 @@ resource "aws_instance" "linux-server" {
     encrypted             = true
     delete_on_termination = true
   }
-  
+
   tags = {
     Name        = "${lower(var.app_name)}-${var.app_environment}-linux-server"
     Environment = var.app_environment
+    F5SE        = var.f5_se
   }
 }
 
 # Associate Elastic IP to Linux Server
 resource "aws_eip_association" "linux-eip-association" {
-#  instance_id   = aws_instance.linux-server.id
+  #  instance_id   = aws_instance.linux-server.id
   instance_id   = aws_instance.linux-server.id
   allocation_id = aws_eip.linux-eip.id
 }
@@ -97,5 +99,6 @@ resource "aws_security_group" "aws-linux-sg" {
   tags = {
     Name        = "${lower(var.app_name)}-${var.app_environment}-linux-sg"
     Environment = var.app_environment
+    F5SE        = var.f5_se
   }
 }
