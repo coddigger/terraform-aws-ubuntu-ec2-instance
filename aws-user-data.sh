@@ -50,6 +50,5 @@ for i in {1..12}; do
   sudo useradd -m -d /home/student$i -s /bin/bash student$i;
 done
 
-#S3A*5Rr#ALCEfw
 
 

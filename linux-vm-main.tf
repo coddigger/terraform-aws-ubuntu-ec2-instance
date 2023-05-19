@@ -46,7 +46,7 @@ resource "aws_instance" "linux-server" {
   }
 
   tags = {
-    Name        = "${lower(var.app_name)}-${var.app_environment}-linux-server"
+    Name        = "${lower(var.app_name)}-${var.app_environment}-linux-desktop"
     Environment = var.app_environment
     F5SE        = var.f5_se
   }
