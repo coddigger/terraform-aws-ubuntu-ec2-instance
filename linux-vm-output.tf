@@ -17,3 +17,7 @@ output "vm_linux_server_instance_public_ip" {
 output "vm_linux_server_instance_private_ip" {
   value = aws_instance.linux-server.*.private_ip
 }
+
+output "rdp_password" {
+  value = random_string.password.result
+}

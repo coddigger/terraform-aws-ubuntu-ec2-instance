@@ -45,7 +45,7 @@ sudo apt -y autoremove
 # CREATE LOCAL USERS
 #############################
 
-for i in {1..12}; do
+for i in {1..16}; do
   echo "Creating student$i"
   sudo useradd -m -d /home/student$i -s /bin/bash student$i;
 done

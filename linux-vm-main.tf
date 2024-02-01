@@ -2,6 +2,12 @@
 ## Virtual Machine Module - Main ##
 ###################################
 
+#Create random password
+resource "random_string" "password" {
+  length  = 10
+  special = false
+}
+
 # Create Elastic IP for the EC2 instance
 resource "aws_eip" "linux-eip" {
   vpc = true
@@ -86,7 +92,15 @@ resource "aws_security_group" "aws-linux-sg" {
     to_port     = 3389
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "Allow incoming SSH connections"
+    description = "Allow incoming RDP connections"
+  }
+
+ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow incoming HTTPS connections"
   }
 
   egress {
