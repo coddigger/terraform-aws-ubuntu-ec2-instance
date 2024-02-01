@@ -10,6 +10,10 @@ output "vm_linux_server_instance_public_dns" {
   value = aws_instance.linux-server.*.public_dns
 }
 
+output "vm_linux_server_eip" {
+  value = aws_eip.linux-eip.id
+}
+
 output "vm_linux_server_instance_public_ip" {
   value = aws_instance.linux-server.*.public_ip
 }

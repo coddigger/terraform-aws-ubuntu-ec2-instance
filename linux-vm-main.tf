@@ -10,7 +10,8 @@ resource "random_string" "password" {
 
 # Create Elastic IP for the EC2 instance
 resource "aws_eip" "linux-eip" {
-  vpc = true
+  #vpc = true
+  domain = "vpc"
   tags = {
     Name        = "${lower(var.app_name)}-${var.app_environment}-linux-eip"
     Environment = var.app_environment
