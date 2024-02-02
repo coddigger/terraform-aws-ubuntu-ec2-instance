@@ -11,7 +11,7 @@ output "vm_linux_server_instance_public_dns" {
 }
 
 output "vm_linux_server_eip" {
-  value = aws_eip.linux-eip.id
+  value = aws_eip.linux-eip
 }
 
 output "vm_linux_server_instance_public_ip" {
