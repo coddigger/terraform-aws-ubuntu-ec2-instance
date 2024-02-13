@@ -26,6 +26,7 @@ resource "aws_instance" "linux-server" {
   instance_type = var.linux_instance_type
   #  ami                         = "ami-0cf13cb849b11b451" # Ubuntu 20.04 desktop image
   #  instance_type               = "t3.micro"
+  # ami = "ami-0536f90611129659d"
   ami = "ami-0536f90611129659d"
   #  instance_type               = "t3.medium"
   subnet_id                   = aws_subnet.public-subnet.id
