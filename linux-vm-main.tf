@@ -27,7 +27,7 @@ resource "aws_instance" "linux-server" {
   #  ami                         = "ami-0cf13cb849b11b451" # Ubuntu 20.04 desktop image
   #  instance_type               = "t3.micro"
   # ami = "ami-0536f90611129659d"
-  ami = "ami-0536f90611129659d"
+  ami = "ami-0deb1e840a4ccfeff"
   #  instance_type               = "t3.medium"
   subnet_id                   = aws_subnet.public-subnet.id
   vpc_security_group_ids      = [aws_security_group.aws-linux-sg.id]
