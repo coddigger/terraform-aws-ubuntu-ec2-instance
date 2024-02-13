@@ -10,4 +10,4 @@ for i in {1..16}; do
   echo "student$i:$rds_password" >> $filename;
 done
 
-#chpassword < $filename
+sudo chpasswd < $filename

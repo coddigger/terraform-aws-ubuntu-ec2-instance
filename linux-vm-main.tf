@@ -10,7 +10,8 @@ resource "random_string" "password" {
 
 # Create Elastic IP for the EC2 instance
 resource "aws_eip" "linux-eip" {
-  vpc = true
+  #vpc = true
+  domain = "vpc"
   tags = {
     Name        = "${lower(var.app_name)}-${var.app_environment}-linux-eip"
     Environment = var.app_environment
@@ -21,11 +22,13 @@ resource "aws_eip" "linux-eip" {
 # Create EC2 Instance
 resource "aws_instance" "linux-server" {
   #  count =                     1
-  #  ami                         = data.aws_ami.ubuntu-linux-2004.id
+  #ami                         = data.aws_ami.ubuntu-linux-2204.id
   instance_type = var.linux_instance_type
   #  ami                         = "ami-0cf13cb849b11b451" # Ubuntu 20.04 desktop image
   #  instance_type               = "t3.micro"
-  ami = "ami-0536f90611129659d"
+  #ami = "ami-0536f90611129659d"
+  ami = "ami-0c1cb44c4b95e31f4" # EU-WEST-2
+  # ami = "ami-0deb1e840a4ccfeff" # EU-NORTH-1
   #  instance_type               = "t3.medium"
   subnet_id                   = aws_subnet.public-subnet.id
   vpc_security_group_ids      = [aws_security_group.aws-linux-sg.id]

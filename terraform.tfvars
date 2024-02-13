@@ -10,7 +10,9 @@ public_subnet_cidr = "10.11.1.0/24"
 # AWS Settings
 #aws_access_key = "xxx"
 #aws_secret_key = "xxx"
-aws_region = "eu-north-1"
+#aws_region = "eu-north-1"
+aws_region = "eu-west-2"
+aws_az = "eu-west-2b"
 
 # Linux Virtual Machine
 #linux_instance_type               = "t3.medium"
