@@ -1,5 +1,7 @@
 #! /bin/bash
 
+numusers=16
+
 # Create Desktop folder for storing Desktop shortcuts
 mkdir /home/ubuntu/Desktop
 chmod +x /home/ubuntu/Desktop
@@ -21,7 +23,7 @@ xdg-desktop-icon install --novendor /usr/share/applications/firefox.desktop
 xdg-desktop-icon install --novendor /usr/share/applications/mate-terminal.desktop
 xdg-desktop-icon install --novendor /usr/share/applications/code.desktop
 
-for i in {1..16}; do
+for i in {1..$numusers}; do
     sudo mkdir -pv /home/student$i/Desktop;
     sudo cp /home/ubuntu/Desktop/* /home/student$i/Desktop;
     sudo chown student$i:student$i /home/student$i/Desktop/*;
