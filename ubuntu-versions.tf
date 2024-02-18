@@ -44,6 +44,20 @@ data "aws_ami" "ubuntu-linux-2204" {
   }
 }
 
+# Get Netcubed Ubuntu Desktop 20.04 AMI
+data "aws_ami" "netcubed-ubuntu-desktop" {
+  most_recent = true
+  owners      = ["679593333241"] # 
+  filter {
+    name   = "name"
+    values = ["netcubed/amd64/ubuntu-desktop-20.04-*"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
 # output Ubuntu AMI IDs
 
 # output "ubuntu_1404_ami_id" {
@@ -62,6 +76,10 @@ data "aws_ami" "ubuntu-linux-2204" {
 #  value = data.aws_ami.ubuntu-linux-2004.id
 #}
 
-output "ubuntu_2204_ami_id" {
-  value = data.aws_ami.ubuntu-linux-2204.id
+# output "ubuntu_2204_ami_id" {
+#   value = data.aws_ami.ubuntu-linux-2204.id
+# }
+
+output "netcubed-ubuntu-desktop_id" {
+  value = data.aws_ami.netcubed-ubuntu-desktop.id
 }
