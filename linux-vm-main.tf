@@ -29,6 +29,8 @@ resource "aws_eip" "linux-eip" {
 resource "aws_instance" "linux-server" {
   #  count =                     1
   ami                         = data.aws_ami.netcubed-ubuntu-desktop.id
+#  ami                         = "ami-035f1f1c2b60c094a"
+#  ami                         = "ami-0373b4f779ad922f6"
   instance_type               = var.linux_instance_type
   subnet_id                   = aws_subnet.public-subnet.id
   vpc_security_group_ids      = [aws_security_group.aws-linux-sg.id]
