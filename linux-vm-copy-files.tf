@@ -26,7 +26,8 @@ resource "terraform_data" "copyscripts" {
             "chmod u+x ./scripts/*.sh",
             "./scripts/install_reqs.sh ${var.time_zone}",
             "./scripts/create_users.sh ${random_string.password.result}",
-            "./scripts/create_desktop_shortcuts.sh"            ]
+            "./scripts/create_desktop_shortcuts.sh"
+            ]
         }
 
 }
