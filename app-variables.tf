@@ -19,3 +19,7 @@ variable "f5_se" {
   description = "F5 Engineer"
 }
 
+variable "time_zone" {
+  type        = string
+  description = "Time Zone"
+}

@@ -8,6 +8,12 @@ resource "random_string" "password" {
   special = false
 }
 
+# Get my own ip
+data "http" "myip" {
+  url = "https://ifconfig.me"
+}
+
+
 # Create Elastic IP for the EC2 instance
 resource "aws_eip" "linux-eip" {
   #vpc = true
@@ -22,20 +28,16 @@ resource "aws_eip" "linux-eip" {
 # Create EC2 Instance
 resource "aws_instance" "linux-server" {
   #  count =                     1
-  #ami                         = data.aws_ami.ubuntu-linux-2204.id
-  instance_type = var.linux_instance_type
-  #  ami                         = "ami-0cf13cb849b11b451" # Ubuntu 20.04 desktop image
-  #  instance_type               = "t3.micro"
-  #ami = "ami-0536f90611129659d"
-  ami = "ami-0c1cb44c4b95e31f4" # EU-WEST-2
-  # ami = "ami-0deb1e840a4ccfeff" # EU-NORTH-1
-  #  instance_type               = "t3.medium"
+  ami                         = data.aws_ami.netcubed-ubuntu-desktop.id
+#  ami                         = "ami-035f1f1c2b60c094a"
+#  ami                         = "ami-0373b4f779ad922f6"
+  instance_type               = var.linux_instance_type
   subnet_id                   = aws_subnet.public-subnet.id
   vpc_security_group_ids      = [aws_security_group.aws-linux-sg.id]
   associate_public_ip_address = var.linux_associate_public_ip_address
   source_dest_check           = false
   key_name                    = aws_key_pair.key_pair.key_name
-  user_data                   = file("aws-user-data.sh")
+  #user_data                   = file("aws-user-data.sh")
 
   # root disk
   root_block_device {
@@ -83,11 +85,12 @@ resource "aws_security_group" "aws-linux-sg" {
   }
 
   ingress {
+    description = "SSH for mgmt"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "Allow incoming SSH connections"
+    cidr_blocks = ["${data.http.myip.response_body}/32"]
+    #cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
@@ -119,3 +122,4 @@ ingress {
     F5SE        = var.f5_se
   }
 }
+
