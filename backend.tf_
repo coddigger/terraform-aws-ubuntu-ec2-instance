@@ -1,0 +1,13 @@
+# Enable this file if using Terraform Cloud
+
+terraform {
+    cloud {
+        organization = "f5-demos"
+
+        workspaces {
+            name = "automation-workshop-101"
+        }
+    }
+
+    required_version = ">= 1.1.2"
+}
