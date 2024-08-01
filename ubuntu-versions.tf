@@ -48,6 +48,7 @@
 data "aws_ami" "netcubed-ubuntu-desktop" {
   most_recent = true
   owners      = ["679593333241"] # 
+  include_deprecated = true
   filter {
     name   = "name"
     values = ["netcubed/amd64/ubuntu-desktop-20.04-*"]
